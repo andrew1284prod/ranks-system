@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASQ Ранговая система</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="site-wrapper">
+        <!-- Шапка с навигацией (для красоты) -->
+        <header class="header">
+            <h1 class="logo">ASQ <span>RANK SYSTEM</span></h1>
+            <nav class="nav">
+                <a href="#welcome">Главная</a>
+                <a href="#about">О нас</a>
+                <a href="#players">Игроки</a>
+                <a href="#rules">Правила</a>
+            </nav>
+        </header>
+
+        <!-- Основной контент -->
+        <main>
+            <!-- 1. Приветственная секция -->
+            <section id="welcome" class="section welcome">
+                <div class="container">
+                    <h2>Добро пожаловать на арену ASQ</h2>
+                    <p>Честные ранговые игры, прозрачная система и уникальные уровни. Присоединяйся к сообществу!</p>
+                </div>
+            </section>
+
+            <!-- 2. Секция "О нас" -->
+            <section id="about" class="section about">
+                <div class="container">
+                    <h2>Мы — ASQ</h2>
+                    <p>Мы пытаемся сделать вашу ранговую игру с нашей системой более справедливой и честной. Мы стараемся для вас.</p>
+                </div>
+            </section>
+
+            <!-- 3. Секция с игроками и рангами (динамически заполняется через JS) -->
+            <section id="players" class="section players">
+                <div class="container">
+                    <h2>Игроки и их ранги</h2>
+                    <div id="playersContainer" class="players-grid">
+                        <!-- Карточки будут сгенерированы скриптом -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Секция правил (преобразованный регламент) -->
+            <section id="rules" class="section rules">
+                <div class="container">
+                    <h2>Глобальный регламент арены</h2>
+                    <div class="rules-content">
+                        <div class="rule-block">
+                            <h3>⚔️ Основной принцип</h3>
+                            <p><strong>Любое противостояние между участниками в любой игре может быть засчитано как официальный матч.</strong></p>
+                            <p><strong>С этого момента, каждую игру я буду вам напоминать, ранговая ли игра. Если <em>все</em> скажут, что <em>нет</em>, то игра будет <em>не</em> на ранг.</strong></p>
+                            <p><em>P.S. Все предыдущие игры, которые <strong>автоматически были засчитаны мной как ранговые</strong>, <strong>не будут откачены</strong>.</em></p>
+                        </div>
+
+                        <div class="rule-block">
+                            <h3>2. Начисление очков (Рангов)</h3>
+                            <ul>
+                                <li><strong>Дуэль (1 на 1):</strong> Победитель получает +1 ранг. Проигравший теряет -1 ранг.</li>
+                                <li><strong>Испытание (1 на 2):</strong> Если одиночка выигрывает у двоих, он получает сразу +3 ранга. Если выигрывает тима — им по +1.</li>
+                                <li><strong>Доминация (Всухую):</strong> Если победа была абсолютной (счет 5-0, 10-0 или огромный отрыв), победитель получает +2 ранга.</li>
+                            </ul>
+                        </div>
+
+                        <div class="rule-block">
+                            <h3>3. Система защиты</h3>
+                            <ul>
+                                <li><strong>Достойный проигрыш:</strong> Если проигравший показал жесткий скилл и почти дожал (например, счет 9-10), по решению Фаундера или Лидера ранг у проигравшего может не сниматься.</li>
+                                <li><strong>Ничья:</strong> Если никто не выиграл — ранги остаются на месте.</li>
+                            </ul>
+                        </div>
+
+                        <div class="rule-block">
+                            <h3>4. Честная игра</h3>
+                            <p><strong>Любой абьюз системы или фейк-скрины караются обнулением до ранга «Новичок».</strong></p>
+                            <p><em>P.S. каждая игра, в которой нет <span class="role">@Дизайнер_сервера</span>, должна быть с демо-записью (демкой). Если в матче участвует <span class="role">@Дизайнер_сервера</span>, демо-запись не требуется, так как его присутствие считается официальным подтверждением результата.</em></p>
+                        </div>
+
+                        <div class="rule-block">
+                            <h3>5. Система пощады</h3>
+                            <p><strong>Я в зависимости от ситуаций, длительности игры, процессу игры могу выдать дополнительный ранг либо наоборот, снижение ранга.</strong></p>
+                        </div>
+
+                        <div class="rule-block">
+                            <h3>6. Формула LVL</h3>
+                            <p><strong>Как я вычисляю ваш LVL</strong> — <em>n/3, где n — Ваш ранг</em>.</p>
+                        </div>
+
+                        <div class="rule-block">
+                            <h3>7. Правила свободы</h3>
+                            <p><strong>Вы можете <u>группой</u> подать заявку на изменение данного регламента, если вам что-нибудь не понравится — можно сказать это <span class="role">@Дизайнер_сервера</span>. Но мы не даем гарантии, что <span class="role">@Дизайнер_сервера</span> согласится на данную инициативу.</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>© 2025 ASQ Ранговая система. Все права защищены.</p>
+        </footer>
+    </div>
+
+    <!-- Скрипт для генерации карточек игроков (легко редактировать) -->
+    <script>
+        // ========== СПИСОК ИГРОКОВ ==========
+        // Добавляйте новых игроков в массив, указывая имя и ранг (число от 1 до 150)
+        const players = [
+            { name: "ShadowHunter", rank: 42 },
+            { name: "DragonSlayer", rank: 17 },
+            { name: "NightWolf", rank: 89 },
+            { name: "IcePhoenix", rank: 5 },
+            { name: "StormBringer", rank: 121 },
+            { name: "VenomSpider", rank: 33 },
+            { name: "IronFist", rank: 70 },
+            { name: "CrimsonGhost", rank: 150 }
+        ];
+
+        // Функция для вычисления уровня и прогресса
+        function calculateLevelAndProgress(rank) {
+            const level = Math.floor((rank - 1) / 3) + 1;
+            const progress = ((rank - 1) % 3) / 3 * 100; // %
+            return { level, progress };
+        }
+
+        // Рендерим карточки
+        const container = document.getElementById('playersContainer');
+        if (container) {
+            players.forEach(player => {
+                const { level, progress } = calculateLevelAndProgress(player.rank);
+                const card = document.createElement('div');
+                card.className = 'player-card';
+
+                // Круговая диаграмма с прогрессом
+                const circleStyle = `background: conic-gradient(#00a6ff 0deg ${progress * 3.6}deg, #2a2f4b ${progress * 3.6}deg 360deg);`;
+
+                card.innerHTML = `
+                    <div class="player-name">${player.name}</div>
+                    <div class="progress-circle" style="${circleStyle}">
+                        <div class="progress-inner">
+                            <span class="lvl-label">LVL</span>
+                            <span class="lvl-value">${level}</span>
+                        </div>
+                    </div>
+                    <div class="player-rank">(ранг ${player.rank})</div>
+                `;
+                container.appendChild(card);
+            });
+        }
+    </script>
+</body>
+</html>
