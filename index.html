@@ -8,7 +8,6 @@
 </head>
 <body>
     <div class="site-wrapper">
-        <!-- Шапка с навигацией (для красоты) -->
         <header class="header">
             <h1 class="logo">ASQ <span>RANK SYSTEM</span></h1>
             <nav class="nav">
@@ -19,9 +18,7 @@
             </nav>
         </header>
 
-        <!-- Основной контент -->
         <main>
-            <!-- 1. Приветственная секция -->
             <section id="welcome" class="section welcome">
                 <div class="container">
                     <h2>Добро пожаловать на арену ASQ</h2>
@@ -29,7 +26,6 @@
                 </div>
             </section>
 
-            <!-- 2. Секция "О нас" -->
             <section id="about" class="section about">
                 <div class="container">
                     <h2>Мы — ASQ</h2>
@@ -37,21 +33,18 @@
                 </div>
             </section>
 
-            <!-- 3. Секция с игроками и рангами (динамически заполняется через JS) -->
             <section id="players" class="section players">
                 <div class="container">
                     <h2>Игроки и их ранги</h2>
-                    <div id="playersContainer" class="players-grid">
-                        <!-- Карточки будут сгенерированы скриптом -->
-                    </div>
+                    <div id="playersContainer" class="players-grid"></div>
                 </div>
             </section>
 
-            <!-- 4. Секция правил (преобразованный регламент) -->
             <section id="rules" class="section rules">
                 <div class="container">
                     <h2>Глобальный регламент арены</h2>
                     <div class="rules-content">
+                        <!-- правила остались без изменений -->
                         <div class="rule-block">
                             <h3>⚔️ Основной принцип</h3>
                             <p><strong>Любое противостояние между участниками в любой игре может быть засчитано как официальный матч.</strong></p>
@@ -106,10 +99,8 @@
         </footer>
     </div>
 
-    <!-- Скрипт для генерации карточек игроков (легко редактировать) -->
     <script>
         // ========== СПИСОК ИГРОКОВ ==========
-        // Добавляйте новых игроков в массив, указывая имя и ранг (число от 1 до 150)
         const players = [
             { name: "Chainsaw", rank: 10 },
             { name: "Andrew", rank: 7 },
@@ -118,23 +109,41 @@
             { name: "Турбокулез", rank: 6 }
         ];
 
-        // Функция для вычисления уровня и прогресса
+        // ========== НАСТРОЙКА ФОРМУЛЫ ==========
+        // Вы можете изменить функцию calculateLevelAndProgress так, как вам нужно.
+        // Сейчас уровень считается как floor((rank-1)/3) + 1, что даёт:
+        // ранг 1-3 → уровень 1, 4-6 → уровень 2, 7-9 → уровень 3 и т.д.
+        // Если вы хотите другое распределение, например, чтобы 7 и 8 ранг были уровнем 2,
+        // используйте формулу: level = Math.floor(rank / 3) + 1 (но тогда 6 ранг станет уровнем 3).
+        // Или напишите свою логику.
+
         function calculateLevelAndProgress(rank) {
-            const level = Math.floor((rank - 1) / 3) + 1;
-            const progress = ((rank - 1) % 3) / 3 * 100; // %
+            // Округление вниз уже используется (Math.floor)
+            const level = Math.floor((rank - 1) / 3);   // ← измените эту строку под свою систему
+
+            // Прогресс внутри уровня (сколько рангов до следующего уровня)
+            const progress = (level / 50) * 100;
+
+            // Если хотите показывать прогресс относительно максимального уровня (50), используйте:
+            // const progress = (level / 50) * 100;
+
             return { level, progress };
         }
 
         // Рендерим карточки
         const container = document.getElementById('playersContainer');
         if (container) {
+            // Очищаем контейнер на случай повторного запуска (не обязательно)
+            container.innerHTML = '';
+
             players.forEach(player => {
                 const { level, progress } = calculateLevelAndProgress(player.rank);
                 const card = document.createElement('div');
                 card.className = 'player-card';
 
-                // Круговая диаграмма с прогрессом
-                const circleStyle = `background: conic-gradient(#00a6ff 0deg ${progress * 3.6}deg, #2a2f4b ${progress * 3.6}deg 360deg);`;
+                // Рассчитываем угол для конического градиента
+                const angle = (progress / 100) * 360;
+                const circleStyle = `background: conic-gradient(#00a6ff 0deg ${angle}deg, #2a2f4b ${angle}deg 360deg);`;
 
                 card.innerHTML = `
                     <div class="player-name">${player.name}</div>
