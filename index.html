@@ -119,7 +119,7 @@
 
         function calculateLevelAndProgress(rank) {
             // Округление вниз уже используется (Math.floor)
-            const level = Math.floor((rank - 1) / 3);   // ← измените эту строку под свою систему
+            const level = Math.floor(rank / 3);   // ← измените эту строку под свою систему
 
             // Прогресс внутри уровня (сколько рангов до следующего уровня)
             const progress = (level / 50) * 100;
