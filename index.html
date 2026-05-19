@@ -44,7 +44,6 @@
                 <div class="container">
                     <h2>Глобальный регламент арены</h2>
                     <div class="rules-content">
-                        <!-- правила остались без изменений -->
                         <div class="rule-block">
                             <h3>⚔️ Основной принцип</h3>
                             <p><strong><li>Любое противостояние между участниками в любой игре может быть засчитано как официальный матч.</li></strong></p>
@@ -74,7 +73,7 @@
                         <div class="rule-block">
                             <h3>4. Честная игра</h3>
                             <p><strong>Любой абьюз системы или фейк-скрины караются обнулением до ранга «Новичок».</strong></p>
-                            <p><em>P.S. каждая игра, в которой нет <span class="role">@Дизайнер_сервера</span>, должна быть с демо-записью (демкой). Если в матче участвует <span class="role">@Дизайнер_сервера</span>, демо-запись не требуется, так как его присутствие считается официальным подтверждением результата.</em></p>
+                            <p><em>P.S. каждая игра, в которой нет <span class="role">@Дизайнер_сервера</span>, должна быть с демо-записью (демкой). Если в матче участвует <span class="role">@Дизайнер_сервера</span>, demo-запись не требуется, так как его присутствие считается официальным подтверждением результата.</em></p>
                         </div>
 
                         <div class="rule-block">
@@ -122,34 +121,19 @@
             { name: "Andrew", rank: 7 },
             { name: "Спичичний коробок", rank: 7 },
             { name: "Владос", rank: 14 },
-            { name: "Турбокулез", rank: 6 }
+            { name: "Турбокулез", rank: 4 } // Изменен ранг до 4, чтобы уровень стал 1 (4/3 = 1.33 -> 1) для теста картинки
         ];
 
         // ========== НАСТРОЙКА ФОРМУЛЫ ==========
-        // Вы можете изменить функцию calculateLevelAndProgress так, как вам нужно.
-        // Сейчас уровень считается как floor((rank-1)/3) + 1, что даёт:
-        // ранг 1-3 → уровень 1, 4-6 → уровень 2, 7-9 → уровень 3 и т.д.
-        // Если вы хотите другое распределение, например, чтобы 7 и 8 ранг были уровнем 2,
-        // используйте формулу: level = Math.floor(rank / 3) + 1 (но тогда 6 ранг станет уровнем 3).
-        // Или напишите свою логику.
-
         function calculateLevelAndProgress(rank) {
-            // Округление вниз уже используется (Math.floor)
-            const level = Math.floor(rank / 3);   // ← измените эту строку под свою систему
-
-            // Прогресс внутри уровня (сколько рангов до следующего уровня)
+            const level = Math.floor(rank / 3); 
             const progress = (level / 50) * 100;
-
-            // Если хотите показывать прогресс относительно максимального уровня (50), используйте:
-            // const progress = (level / 50) * 100;
-
             return { level, progress };
         }
 
         // Рендерим карточки
         const container = document.getElementById('playersContainer');
         if (container) {
-            // Очищаем контейнер на случай повторного запуска (не обязательно)
             container.innerHTML = '';
 
             players.forEach(player => {
@@ -157,16 +141,19 @@
                 const card = document.createElement('div');
                 card.className = 'player-card';
 
-                // Рассчитываем угол для конического градиента
                 const angle = (progress / 100) * 360;
                 const circleStyle = `background: conic-gradient(#00a6ff 0deg ${angle}deg, #2a2f4b ${angle}deg 360deg);`;
+
+                // Условие: если у игрока 1 уровень, выводим картинку 1lvl.png
+                const levelContent = level === 1 
+                    ? `<img src="1lvl.png" alt="Уровень 1">` 
+                    : `<span class="lvl-label">LVL</span><span class="lvl-value">${level}</span>`;
 
                 card.innerHTML = `
                     <div class="player-name">${player.name}</div>
                     <div class="progress-circle" style="${circleStyle}">
                         <div class="progress-inner">
-                            <span class="lvl-label">LVL</span>
-                            <span class="lvl-value">${level}</span>
+                            ${levelContent}
                         </div>
                     </div>
                     <div class="player-rank">(ранг ${player.rank})</div>
