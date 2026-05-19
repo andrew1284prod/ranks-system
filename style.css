@@ -157,7 +157,7 @@ h2 {
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    background: #2a2f4b; /* заливка по умолчанию (будет переопределена встроенным стилем) */
+    background: #2a2f4b;
     margin-bottom: 15px;
     position: relative;
     display: flex;
@@ -303,4 +303,16 @@ h2 {
     .rules-content {
         padding: 20px;
     }
+}
+
+/* Стили для иконки 1 уровня */
+.progress-inner img {
+    max-width: 55px;
+    max-height: 55px;
+    object-fit: contain;
+    transition: transform 0.3s;
+}
+
+.player-card:hover .progress-inner img {
+    transform: scale(1.1);
 }
